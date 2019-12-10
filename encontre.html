@@ -1,0 +1,146 @@
+<div class="navbar">
+    <div class="navbar-inner">
+        <div class="left">
+            <a href="#" class="back link">
+                <i class="icon icon-back"></i>
+                <span>Atras</span>
+            </a>
+        </div>
+        <div class="center sliding">Encontre una mascota</div>
+        
+    </div>
+</div>
+<div class="pages">
+    <div data-page="encontre" class="page">
+        <div class="page-content">
+            <div class="content-block">
+                    <div class="card demo-card-header-pic">
+                            <div style="background-image:url(https://www.riogrande.gob.ar/wp-content/uploads/2018/01/rio-grande-mejoramos-la-vida-de-los-animales-1.jpg)" class="card-header align-items-flex-end">Dejanos los datos de la mascota que encontraste</div>
+                            <div class="card-content card-content-padding">
+                              <p>El siguiente formulario es para que completes con los datos de la mascota que encontraste, asi nosotros subimos las fotos y las caracteristicas para hacer que se encuentre con su dueñx.</p>
+                            </div>
+                            <form class="list" id="my-form">
+                                <ul>
+                                  <li>
+                                    <div class="item-content item-input">
+                                      <div class="item-inner">
+                                        <div class="item-title item-label">¿Que mascota encontraste?</div>
+                                        <input type="text" name="tipomascota" placeholder="Perro,gato,etc" id="tipomascota">
+                                        <div class="item-input-wrap">                                                                       
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </li>
+                                  <li> <br>
+                                        <div class="item-content item-input">
+                                                <div class="item-inner">
+                                                  <div class="item-title item-label">¿Que tamaño tiene?</div><br>
+                                                  <div class="item-input-wrap">
+                                                    <input type="text" name="tamaño" placeholder="Grande,mediana,chica" id="tamaño" >
+                                                  </div>
+                                                </div>
+                                              </div>
+                                            </li><br>
+                                            <li>
+                                              <div class="item-content item-input">
+                                                <div class="item-inner">
+                                                  <div class="item-title item-label">Algunas características que puedas mencionarnos de la mascota que encontraste.</div>
+                                                  <div class="item-input-wrap">
+                                                    <input type="text" name="caracteristicas" id="caracteristicas" >
+                                                  </div>
+                                                </div>
+                                              </div>
+                                            </li>
+                                            <li>
+                                            <div class="item-content item-input">
+                                                    <div class="item-inner">
+                                                      <div class="item-title item-label">Telefono de contacto</div>
+                                                      <div class="item-input-wrap">
+                                                        <input type="tel" name="telcontacto" placeholder="+54.." id="telcontacto">
+                                                      </div>
+                                            </li>
+                                            <li>
+                                            <div class="item-content item-input">
+                                                            <div class="item-inner">
+                                                              <div class="item-title item-label">Correo electronico</div>
+                                                              <div class="item-input-wrap">
+                                                                <input type="email" name="emailcontacto" placeholder="E-mail" id="email">
+                                                              </div>
+                                            </li>
+                                            <li>
+                                            <div class="item-content item-input">
+                                                                    <div class="item-inner">
+                                                                      <div class="item-title item-label">Comentanos brevemente donde la encontraste, en que estado se encontraba y cualquier cosa adicional que pueda servir para encontrar a su dueñx</div>
+                                                                      <div class="item-input-wrap">
+                                                                        <input type="text" name="comentario" id="prueba()" placeholder="Estaba sucio en la esquina de..." id="comentarios">
+                                                                      </div> 
+                                                                       </li>
+                                            <div class="item-content item-input">
+                                                    <div class="item-inner">
+                                                      <div class="item-title item-label">Carga aqui archivos de imagen o video para poder subirlos a la plataforma</div>
+                                                      <div class="item-input-wrap">            
+                                                        <input type="file" value="upload" id="fileButton" id="archivo">
+                                                      </div> 
+                            </li>
+                                          </ul>
+                                          <!-- <input type="button" value="Enviar" onclick="enviarDatos()"> -->
+                                          <!-- <button class="col button button-fill" onclick="enviarDatos()">Enviar</button> -->
+                                          <a href="#" onclick="enviarDatos()" id="enviarDatos">Enviar</a>
+
+                                          <script>
+                                            var tamaño = document.getElementById("tamaño");
+                                            var caracteristicas = document.getElementById("caracteristicas");
+                                            var telcontacto = document.getElementById("telcontacto");
+                                            var email = document.getElementById("telcontacto");
+                                            var comentarios = document.getElementById("comentarios");
+
+
+                                            $$('#enviarDatos').on('click', function(){
+                                            db.collection("infoLostPets").doc(tamaño.value).set({
+                                              tamaño: tamaño.value,
+                                              caracteristicas: caracteristicas.value,
+                                              telcontacto: telcontacto.value,
+                                              email: email.value,
+                                              comentarios: comentarios.value
+                                            })
+                                        })
+
+                                        // function enviarDatos() {
+                                        //     db.collection("infoLostPets").doc(email.value).set({
+                                        //       tamaño: tamaño.value,
+                                        //       caracteristicas: caracteristicas.value,
+                                        //       telcontacto: telcontacto.value,
+                                        //       email: email.value,
+                                        //       comentarios: comentarios.value
+                                        //      })
+                                        //         .then(function(docRef){
+                                        //           console.log(alias.value);
+                                        //        })
+                                        //       .catch(function(error){
+                                        //           console.log("Error "+ error);})};
+                                          </script>
+                                      
+                                        </form>                                      
+                                                  
+                          </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-app.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+         https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-analytics.js"></script>
+    
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="lib/framework7/js/framework7.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.10.1/firebase-storage.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-analytics.js"></script>
+    <script src="js/firebase.js"></script>
+    <script type="text/javascript" src="js/my-app.js"></script>

@@ -1,146 +1,106 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    <link href="https://fonts.googleapis.com/css?family=Pathway+Gothic+One|Staatliches&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Chathura|Geo&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/stylesheet.css">
+    <!--
+        Customize this policy to fit your own app's needs. For more guidance, see:
+            https://github.com/apache/cordova-plugin-whitelist/blob/master/README.md#content-security-policy
+        Some notes:
+            * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
+            * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
+            * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
+                * Enable inline JS: add 'unsafe-inline' to default-src
+        -->
+        <meta http-equiv="Content-Security-Policy" content="img-src * 'self' data: https:; default-src gap://ready file://* *; script-src 'self' 'unsafe-inline' 'unsafe-eval' *; style-src 'self' 'unsafe-inline' *">
+    <!-- Required meta tags-->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
 
-    
+    <!-- Your app title -->
+    <title>Lost Pets</title>
+
+    <!-- This template defaults to the iOS CSS theme. To support both iOS and material design themes, see the Framework7 Tutorial at the link below:
+        http://www.idangero.us/framework7/tutorials/maintain-both-ios-and-material-themes-in-single-app.html
+     -->
+
+    <link rel="stylesheet" href="lib/framework7/css/framework7.ios.min.css">
+    <link rel="stylesheet" href="lib/framework7/css/framework7.ios.colors.min.css">
+    <link rel="stylesheet" href="lib/framework7/css/framework7-icons.css">
+    <link rel="stylesheet" href="css/styles.css">
 </head>
+
 <body>
+    <!-- Status bar overlay for full screen mode (PhoneGap) -->
+    <div class="statusbar-overlay"></div>
 
-<div id="contenedor">
-
-    <div id="inicio"> 
-         <h1 class="focus-in-expand" >Anotador de generala</h1>
-        <p>Reglas: Maximo de 6 jugadores y maximo de 3 tiros por jugada </p>
+    <!-- Panels overlay-->
+    <div class="panel-overlay"></div>
+    <!-- Left panel with reveal effect-->
+    <div class="panel panel-left panel-reveal">
+        <div class="content-block">
+            <p><a href="pagina3.html">otra pagina</a></p>
+        </div>
     </div>
 
-<div id="contenedorpaginainicial"  >
-     <label for="ingrese">Ingrese numero de jugadores</label> <br>
-     <input type="number" id="ingrese" placeholder="ingrese numero de jugadores" required>
-    <input type="submit" value="Jugar!" onclick="mostrarinput()" id="botoningrese" >
-</div>
+    <!-- Views -->
+    <div class="views">
+        <!-- Your main view, should have "view-main" class -->
+        <div class="view view-main">
+            <!-- Top Navbar-->
+            <div class="navbar">
+                <div class="navbar-inner">
+                    <!-- We need cool sliding animation on title element, so we have additional "sliding" class -->
+                    <div class="center sliding">Lost Pets</div>
+                    <div class="right">
+                        <!--
+                          Right link contains only icon - additional "icon-only" class
+                          Additional "open-panel" class tells app to open panel when we click on this link
+                        -->
+                        <!-- <a href="#" class="link icon-only open-panel"><i class="icon icon-bars"></i></a> -->
+                    </div>
+                </div>
+            </div>
+            <!-- Pages container, because we use fixed-through navbar and toolbar, it has additional appropriate classes-->
+            <div class="pages navbar-through toolbar-through">
+                <!-- Page, "data-page" contains page name -->
+                <div data-page="index" class="page">
+                    <!-- Scrollable page content -->
+                    <div class="page-content">
+                        <div id="botones">
+                            <a href="perdi.html"><button class="col button button-fill" id="perdiboton">Perdi mi mascota</button></a></div>
+                         <div id="botones"><a href="encontre.html"><button class="col button button-fill" id="encontreboton">Encontre una mascota</button></a></div>
+                                                
+                    </div>
+                </div>
+            </div>
+            
+           
+            </div>
+        </div>
+    </div>
 
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-app.js"></script>
 
-<div id="contenedorinputs">
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-analytics.js"></script>
 
-<div class=inputs id="inputsgenerala">
- <h2>Jugador 1</h2><br>
- <form >
-    <label for="Generala">G</label><input type="number" id="generala" onchange="sumar(this.value);" max="60"> <br>
-    <label for="Poker">P</label><input type="number" id="poker" onchange="sumar(this.value);" max="45"> <br>
-    <label for="Full">F</label><input type="number" id="full" onchange="sumar(this.value);"  max="35"> <br>
-    <label for="Escalera">E</label><input type="number" onchange="sumar(this.value);" max="25"> <br>
-    <label for="6" >6</label><input type="number" id="seis"  onchange="sumar(this.value);"  max="30"> <br>
-    <label for="5" >5</label><input type="number" id="cinco" onchange="sumar(this.value);" max="25"> <br>
-    <label for="4" >4</label><input type="number" id="cuatro" onchange="sumar(this.value);" max="20"> <br>
-    <label for="3" >3</label><input type="number" id="tres" onchange="sumar(this.value);" max="15"><br>
-    <label for="2" >2</label><input type="number" id="dos" onchange="sumar(this.value);" max="10"> <br>
-    <label for="1" >1</label><input type="number" id="uno" onchange="sumar(this.value);" max="5"> <br>
-   
-    <span>El resultado es: </span> <span id="spTotal"></span>
-</form>
-</div>
+<script type="text/javascript" src="cordova.js"></script>
+<script type="text/javascript" src="lib/framework7/js/framework7.min.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.10.1/firebase-storage.js"></script>
+<script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-firestore.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-analytics.js"></script>
+<script src="js/firebase.js"></script>
+<script type="text/javascript" src="js/my-app.js"></script>
 
-<div class=inputs id="inputsgenerala2">
-    <h2>Jugador 2</h2><br>
-    <form>
-        <label for="Generala">G</label><input type="number" id="generala" onchange="sumar2(this.value)" max="60"> <br>
-        <label for="Poker">P</label><input type="number" id="poker" onchange="sumar2(this.value)" max="45"> <br>
-        <label for="Full">F</label><input type="number" id="full" onchange="sumar2(this.value)" max="35"> <br>
-        <label for="Escalera">E</label><input type="number" id="escalera" onchange="sumar2(this.value)" max="25"> <br>
-        <label for="6">6</label><input type="number" id="seis" onchange="sumar2(this.value)" max="30"> <br>
-        <label for="5">5</label><input type="number" id="cinco" onchange="sumar2(this.value)" max="25"> <br>
-        <label for="4">4</label><input type="number" id="cuatro" onchange="sumar2(this.value)" max="20"> <br>
-        <label for="3">3</label><input type="number" id="tres" onchange="sumar2(this.value)" max="15"> <br>
-        <label for="2">2</label><input type="number" id="dos" onchange="sumar2(this.value)" max="10"> <br>
-        <label for="1">1</label><input type="number" id="uno" onchange="sumar2(this.value)" max="5"> <br>
-        <span>El resultado es: </span> <span id="spTotal2"></span>
-    </form>
-</div>
-
-<div class=inputs id="inputsgenerala3">
-    <h2>Jugador 3</h2><br>
-    <form>
-     
-        <label for="Generala">G</label><input type="number" id="generala" onchange="sumar3(this.value)" max="60"> <br>
-        <label for="Poker">P</label><input type="number" id="poker" onchange="sumar3(this.value)" max="45"> <br>
-        <label for="Full">F</label><input type="number" id="full" onchange="sumar3(this.value)" max="35"> <br>
-        <label for="Escalera">E</label><input type="number" id="escalera" onchange="sumar3(this.value)" max="25"> <br>
-        <label for="6">6</label><input type="number" id="seis" onchange="sumar3(this.value)"   max="30" > <br>
-        <label for="5">5</label><input type="number" id="cinco" onchange="sumar3(this.value)" max="25"> <br>
-        <label for="4">4</label><input type="number" id="cuatro" onchange="sumar3(this.value)" max="20"> <br>
-        <label for="3">3</label><input type="number" id="tres" onchange="sumar3(this.value)"max="15"> <br>
-        <label for="2">2</label><input type="number" id="dos" onchange="sumar3(this.value)" max="10"> <br>
-        <label for="1">1</label><input type="number" id="uno" onchange="sumar3(this.value)" max="5"> <br>
-        <span>El resultado es: </span> <span id="spTotal3"></span>
-    </form>
-</div>
-
-<div class=inputs id="inputsgenerala4">
-    <h2>Jugador 4</h2> <br>
-    <form>
-        <label for="Generala">G</label><input type="number" id="generala" onchange="sumar4(this.value)" max="60"> <br>
-        <label for="Poker">P</label><input type="number" id="poker" onchange="sumar4(this.value)" max="45"> <br>
-        <label for="Full">F</label><input type="number" id="full" onchange="sumar4(this.value)"  max="35"> <br>
-        <label for="Escalera">E</label> <input type="number" id="escalera" onchange="sumar4(this.value)"  max="25"> <br>
-        <label for="6">6</label><input type="number" id="seis" onchange="sumar4(this.value)" max="30"> <br>
-        <label for="5">5</label><input type="number" id="cinco" onchange="sumar4(this.value)" max="25"> <br>
-        <label for="4">4</label><input type="number" id="cuatro" onchange="sumar4(this.value)" max="20"> <br>
-        <label for="3">3</label><input type="number" id="tres" onchange="sumar4(this.value)" max="15"> <br>
-        <label for="2">2</label><input type="number" id="dos" onchange="sumar4(this.value)" max="10"> <br>
-        <label for="1">1</label><input type="number" id="uno" onchange="sumar4(this.value)" max="5"> <br>
-        <span>El resultado es: </span> <span id="spTotal4"></span>
-    </form>
-</div>
-
-<div class=inputs id="inputsgenerala5">
-    <h2>Jugador 5</h2> <br>
-    <form>
-  
-        <label for="Generala">G</label><input type="number" id="generala" onchange="sumar5(this.value)" max="60"> <br>
-        <label for="Poker">P</label><input type="number" id="poker" onchange="sumar5(this.value)" max="45"> <br>
-        <label for="Full">F</label><input type="number" id="full" onchange="sumar5(this.value)"  max="35"> <br>
-        <label for="Escalera">E</label><input type="number" id="escalera" onchange="sumar5(this.value)"  max="25"> <br>
-        <label for="6">6</label><input type="number" id="seis" onchange="sumar5(this.value)" max="30"> <br>
-        <label for="5">5</label><input type="number" id="cinco" onchange="sumar5(this.value)" max="25"> <br>
-        <label for="4">4</label><input type="number" id="cuatro" onchange="sumar5(this.value)" max="20"> <br>
-        <label for="3">3</label><input type="number" id="tres" onchange="sumar5(this.value)" max="15"> <br>
-        <label for="2">2</label><input type="number" id="dos" onchange="sumar5(this.value)" max="10"> <br>
-        <label for="1">1</label><input type="number" id="uno" onchange="sumar5(this.value)" max="5"> <br>
-        <span>El resultado es: </span> <span id="spTotal5"></span>
-</form>
-</div>
-
-<div class=inputs id="inputsgenerala6">
-    <h2>Jugador 6</h2> <br>
-    <form>
-        <label for="Generala">G</label><input type="number" id="generala" onchange="sumar6(this.value)" max="60"> <br>
-        <label for="Poker">P</label><input type="number" id="poker" onchange="sumar6(this.value)" max="45"> <br>
-        <label for="Full">F</label><input type="number" id="full" onchange="sumar6(this.value)"  max="35"> <br>
-        <label for="Escalera">E</label><input type="number" id="escalera" onchange="sumar6(this.value)"  max="25"> <br>
-        <label for="6">6</label><input type="number" id="seis" onchange="sumar6(this.value)" max="30"> <br>
-        <label for="5">5</label><input type="number" id="cinco" onchange="sumar6(this.value)" max="25"> <br>
-        <label for="4">4</label><input type="number" id="cuatro" onchange="sumar6(this.value)" max="20"> <br>
-        <label for="3">3</label><input type="number" id="tres" onchange="sumar6(this.value)" max="15"> <br>
-        <label for="2">2</label><input type="number" id="dos" onchange="sumar6(this.value)" max="10"> <br>
-        <label for="1">1</label><input type="number" id="uno" onchange="sumar6(this.value)" max="5"> <br>
-        <span>El resultado es: </span> <span id="spTotal6"></span>
-</form>
-</div>
-</div>
-
-<br><br><br><br>
-
-
-</div> 
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="script/script.js"></script>
+    
 </body>
+
 </html>
+
